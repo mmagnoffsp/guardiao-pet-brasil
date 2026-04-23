@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../services/supabaseClient';
 
-// Definindo os estilos fora para evitar recriação em cada render (Heurística de Eficiência)
+// Estilos mantidos para consistência visual
 const labelStyle = {
   display: 'block',
   marginBottom: '8px',
@@ -23,7 +23,6 @@ const inputStyle = {
 };
 
 function CadastroPet() {
-  // Estado para capturar todos os campos do formulário
   const [formData, setFormData] = useState({
     nome: '',
     especie: '',
@@ -48,17 +47,14 @@ function CadastroPet() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Aqui fazemos a inserção no Supabase
     const { data, error } = await supabase
-      .from('pets') // Certifique-se que a tabela no Supabase tem esse nome
+      .from('pets')
       .insert([formData]);
 
     if (error) {
       alert("Erro ao cadastrar: " + error.message);
     } else {
       alert("Pet cadastrado com sucesso! 🐾");
-      // Limpa o formulário após o sucesso
       setFormData({
         nome: '', especie: '', idade: '', pelagem: '', peso: '',
         castrado: false, operado: false, vacinas: '', cirurgias: '',
@@ -80,9 +76,18 @@ function CadastroPet() {
             <input style={inputStyle} name="nome" value={formData.nome} onChange={handleChange} type="text" placeholder="Ex: Amigão" required />
           </div>
 
+          {/* Seletor de Espécie */}
           <div>
             <label style={labelStyle}>Espécie</label>
-            <input style={inputStyle} name="especie" value={formData.especie} onChange={handleChange} type="text" placeholder="Cachorro, Gato..." required />
+            <select style={inputStyle} name="especie" value={formData.especie} onChange={handleChange} required>
+              <option value="">Selecione...</option>
+              <option value="Cachorro">Cachorro</option>
+              <option value="Gato">Gato</option>
+              <option value="Pássaro">Pássaro</option>
+              <option value="Coelho">Coelho</option>
+              <option value="Roedor">Roedor (Hamster, Porquinho da Índia)</option>
+              <option value="Outros">Outros</option>
+            </select>
           </div>
 
           <div>
@@ -109,9 +114,19 @@ function CadastroPet() {
             </label>
           </div>
 
+          {/* Seletor de Vacinas */}
           <div style={{ gridColumn: '1 / span 2' }}>
-            <label style={labelStyle}>Vacinas</label>
-            <input style={inputStyle} name="vacinas" value={formData.vacinas} onChange={handleChange} type="text" placeholder="V10, Raiva, etc." />
+            <label style={labelStyle}>Protocolo de Vacinação</label>
+            <select style={inputStyle} name="vacinas" value={formData.vacinas} onChange={handleChange}>
+              <option value="">Selecione a situação...</option>
+              <option value="Nenhuma">Nenhuma vacina aplicada</option>
+              <option value="Incompleto">Protocolo Incompleto</option>
+              <option value="V8/V10 + Raiva (Cães)">V8/V10 + Raiva (Completa para Cães)</option>
+              <option value="V3/V4/V5 + Raiva (Gatos)">V3/V4/V5 + Raiva (Completa para Gatos)</option>
+              <option value="Apenas Raiva">Apenas Raiva</option>
+              <option value="Totalmente Vacinado">Totalmente Vacinado (Outras espécies)</option>
+              <option value="Desconhecido">Não possui informação</option>
+            </select>
           </div>
 
           <div>
@@ -126,7 +141,7 @@ function CadastroPet() {
 
           <div style={{ gridColumn: '1 / span 2' }}>
             <label style={labelStyle}>História ou Descrição</label>
-            <textarea style={inputStyle} name="descricao" value={formData.descricao} onChange={handleChange} rows="4" required />
+            <textarea style={inputStyle} name="descricao" value={formData.descricao} onChange={handleChange} rows="4" placeholder="Conte sobre o pet..." required />
           </div>
 
           <button type="submit" style={{ gridColumn: '1 / span 2', backgroundColor: '#27ae60', color: 'white', border: 'none', padding: '16px', borderRadius: '10px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer' }}>
