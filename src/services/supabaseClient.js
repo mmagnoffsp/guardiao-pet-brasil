@@ -1,7 +1,9 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js'
 
-// Substitua pelas suas credenciais do projeto no Supabase
-const supabaseUrl = 'https://SUA_URL_AQUI.supabase.co';
-const supabaseAnonKey = 'SUA_CHAVE_ANON_AQUI';
+// URL do seu novo projeto guardiao-pet-brasil
+const supabaseUrl = 'https://clplerltyjbsvpjhchga.supabase.co'
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Sua nova Publishable Key que você gerou agora
+const supabaseKey = 'sb_publishable_bOVOD3bLWKvAWFTSkFJkhg_XXGJP9KX'
+
+export const supabase = createClient(supabaseUrl, supabaseKey)
