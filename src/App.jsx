@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import CadastroPet from './pages/CadastroPet'; // Vamos criar este arquivo no passo 2
+import CadastroPet from './components/CadastroPet'; // Vamos criar este arquivo no passo 2
 
 function App() {
   return (
