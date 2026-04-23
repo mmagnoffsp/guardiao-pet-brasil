@@ -1,37 +1,19 @@
-import { Link } from 'react-router-dom'; // Importante para a navegação funcionar
+import { Link } from 'react-router-dom';
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav style={{ 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center',
-      padding: '1rem 2rem', 
-      background: '#2c3e50', 
-      color: 'white',
-      fontFamily: 'sans-serif'
-    }}>
-      <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-        <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>🐾 Guardião Pet Brasil</Link>
+    <nav className="bg-blue-600 p-4 text-white shadow-lg">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="font-bold text-xl">Guardião Pet SP</Link>
+        
+        <div className="flex gap-6">
+          <Link to="/" className="hover:text-blue-200 transition">Início</Link>
+          <Link to="/cadastro" className="hover:text-blue-200 transition">Cadastrar Pet</Link>
+          <Link to="/adotados" className="hover:text-blue-200 transition">Pets Adotados</Link>
+        </div>
       </div>
-      
-      <ul style={{ 
-        display: 'flex', 
-        listStyle: 'none', 
-        gap: '20px', 
-        margin: 0, 
-        padding: 0 
-      }}>
-        <li>
-          <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Início</Link>
-        </li>
-        <li>
-          <Link to="/cadastro" style={{ color: 'white', textDecoration: 'none' }}>Cadastrar</Link>
-        </li>
-        <li style={{ cursor: 'pointer' }}>Sobre</li>
-      </ul>
     </nav>
   );
-}
+};
 
 export default Navbar;
